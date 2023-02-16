@@ -37,6 +37,4 @@ public class Cliente {
     public String toString() {
         return "ID Cliente: " + id + "\n Nome: " + nome + "\n CPF: " + cpf + " \n Data de Nascimento: " + sdf.format(dataNascimento);
     }
-
-    
 }

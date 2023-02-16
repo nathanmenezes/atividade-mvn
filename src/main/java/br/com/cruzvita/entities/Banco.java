@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.cruzvita.util.AcoesBanco;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Table(name = "TB_BANCO")
 @Getter
 @Setter
-public class Banco{
+public class Banco implements AcoesBanco{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -31,10 +32,12 @@ public class Banco{
         this.conta = conta;
     }
 
+    @Override
     public void deposito(double quantidade){
         conta.setSaldo(conta.getSaldo() + quantidade);
     }
 
+    @Override
     public void transferir(double quantidade, Banco banco){
         if(this.conta.getSaldo() >= quantidade){
             this.conta.setSaldo(this.conta.getSaldo() - quantidade);
@@ -44,6 +47,7 @@ public class Banco{
         }
     }
 
+    @Override
     public void sacar(double quantidade){
         if(conta.getSaldo() >= quantidade){
             conta.setSaldo(conta.getSaldo() - quantidade);
@@ -57,6 +61,4 @@ public class Banco{
         return " ID Banco: " + id + "\n Nome Banco: " + nome
                 +conta;
     }
-
-    
 }
